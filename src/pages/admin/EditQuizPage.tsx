@@ -1,11 +1,10 @@
-
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageLayout from "@/components/layout/PageLayout";
 import QuizForm from "@/components/admin/QuizForm";
 import AdminCheck from "@/lib/AdminCheck";
 import { useQuiz } from "@/context/QuizContext";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/lib/toast";
 
 const EditQuizPage: React.FC = () => {
   const { quizId } = useParams<{ quizId: string }>();

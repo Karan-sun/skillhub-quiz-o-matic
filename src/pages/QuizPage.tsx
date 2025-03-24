@@ -9,8 +9,8 @@ import QuizTimer from "@/components/quiz/QuizTimer";
 import QuizResults from "@/components/quiz/QuizResults";
 import { useQuiz, QuizQuestion as QuestionType } from "@/context/QuizContext";
 import { useAuth } from "@/context/AuthContext";
-import { toast } from "@/components/ui/sonner";
-import { AlertCircle, ArrowLeft } from "lucide-react";
+import { toast } from "@/lib/toast";
+import { AlertCircle, ArrowLeft, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const QuizPage: React.FC = () => {
