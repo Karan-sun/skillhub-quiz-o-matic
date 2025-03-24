@@ -109,10 +109,13 @@ const QuizPage: React.FC = () => {
     }
     
     setQuizStarted(true);
+    // Initialize with -1 values indicating no answer selected
     setAnswers(new Array(quiz.questions.length).fill(-1));
   };
 
   const handleAnswer = (selectedOption: number) => {
+    console.log("Selected option:", selectedOption, "for question:", currentQuestionIndex);
+    
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = selectedOption;
     setAnswers(newAnswers);
@@ -123,6 +126,12 @@ const QuizPage: React.FC = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setQuizCompleted(true);
+    }
+  };
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
@@ -226,7 +235,7 @@ const QuizPage: React.FC = () => {
               onAnswer={handleAnswer}
               onNext={handleNextQuestion}
               showResults={answers[currentQuestionIndex] !== -1}
-              selectedOption={answers[currentQuestionIndex]}
+              selectedOption={answers[currentQuestionIndex] === -1 ? undefined : answers[currentQuestionIndex]}
             />
             
             {/* Progress indicator */}
@@ -234,8 +243,8 @@ const QuizPage: React.FC = () => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => setCurrentQuestionIndex(Math.max(0, currentQuestionIndex - 1))}
-                disabled={currentQuestionIndex === 0 || answers[currentQuestionIndex] === -1}
+                onClick={handlePreviousQuestion}
+                disabled={currentQuestionIndex === 0}
               >
                 Previous
               </Button>

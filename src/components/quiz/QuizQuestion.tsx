@@ -1,11 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { QuizQuestion as QuestionType } from "@/context/QuizContext";
 import { cn } from "@/lib/utils";
+import { toast } from "@/lib/toast";
 
 interface QuizQuestionProps {
   question: QuestionType;
@@ -29,15 +30,26 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   const [selected, setSelected] = useState<number | undefined>(selectedOption);
   const [isAnswered, setIsAnswered] = useState(selectedOption !== undefined);
 
+  // Update local state when selectedOption prop changes
+  useEffect(() => {
+    setSelected(selectedOption);
+    setIsAnswered(selectedOption !== undefined);
+  }, [selectedOption]);
+
   const handleOptionSelect = (value: string) => {
-    const optionIndex = parseInt(value, 10);
-    setSelected(optionIndex);
+    if (!isAnswered) {
+      const optionIndex = parseInt(value, 10);
+      setSelected(optionIndex);
+    }
   };
 
   const handleSubmit = () => {
     if (selected !== undefined) {
       onAnswer(selected);
       setIsAnswered(true);
+      toast.success("Answer submitted!");
+    } else {
+      toast.error("Please select an answer");
     }
   };
 
