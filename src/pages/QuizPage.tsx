@@ -51,7 +51,6 @@ const QuizPage: React.FC = () => {
       const calculatedTimeTaken = Math.floor((Date.now() - startTime) / 1000);
       setTimeTaken(calculatedTimeTaken);
       
-      // Calculate final score
       let finalScore = 0;
       answers.forEach((answer, index) => {
         if (quiz && index < quiz.questions.length) {
@@ -108,7 +107,6 @@ const QuizPage: React.FC = () => {
     }
     
     setQuizStarted(true);
-    // Initialize with undefined values indicating no answer selected
     setAnswers(new Array(quiz.questions.length).fill(-1));
   };
 
@@ -217,14 +215,12 @@ const QuizPage: React.FC = () => {
           </Card>
         ) : (
           <div className="space-y-6">
-            {/* Timer */}
             <QuizTimer 
               durationInMinutes={quiz.timeLimit} 
               onTimeUp={handleTimeUp}
               isPaused={quizCompleted}
             />
             
-            {/* Question */}
             <QuizQuestion
               question={quiz.questions[currentQuestionIndex]}
               questionNumber={currentQuestionIndex + 1}
@@ -232,10 +228,9 @@ const QuizPage: React.FC = () => {
               onAnswer={handleAnswer}
               onNext={handleNextQuestion}
               showResults={answers[currentQuestionIndex] !== -1}
-              selectedOption={answers[currentQuestionIndex] === -1 ? undefined : answers[currentQuestionIndex]}
+              selectedOption={answers[currentQuestionIndex]}
             />
             
-            {/* Progress indicator */}
             <div className="flex justify-between text-sm text-muted-foreground">
               <Button 
                 variant="ghost" 

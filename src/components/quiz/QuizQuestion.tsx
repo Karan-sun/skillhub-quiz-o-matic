@@ -28,12 +28,12 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   selectedOption,
 }) => {
   const [selected, setSelected] = useState<number | undefined>(selectedOption);
-  const [isAnswered, setIsAnswered] = useState(selectedOption !== undefined);
+  const [isAnswered, setIsAnswered] = useState(selectedOption !== undefined && selectedOption !== -1);
 
   // Update local state when selectedOption prop changes
   useEffect(() => {
-    setSelected(selectedOption);
-    setIsAnswered(selectedOption !== undefined);
+    setSelected(selectedOption === -1 ? undefined : selectedOption);
+    setIsAnswered(selectedOption !== undefined && selectedOption !== -1);
   }, [selectedOption]);
 
   const handleOptionSelect = (value: string) => {
@@ -54,6 +54,8 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   };
 
   const getOptionClassName = (index: number) => {
+    // Only show correct/incorrect highlighting when the question has been answered
+    // AND we're in the results view mode
     if (!showResults || selected === undefined) return "";
     
     if (index === question.correctOption) {
