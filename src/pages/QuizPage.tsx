@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageLayout from "@/components/layout/PageLayout";
@@ -109,13 +108,11 @@ const QuizPage: React.FC = () => {
     }
     
     setQuizStarted(true);
-    // Initialize with -1 values indicating no answer selected
+    // Initialize with undefined values indicating no answer selected
     setAnswers(new Array(quiz.questions.length).fill(-1));
   };
 
   const handleAnswer = (selectedOption: number) => {
-    console.log("Selected option:", selectedOption, "for question:", currentQuestionIndex);
-    
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = selectedOption;
     setAnswers(newAnswers);
@@ -253,7 +250,7 @@ const QuizPage: React.FC = () => {
                 variant="ghost" 
                 size="sm"
                 onClick={handleNextQuestion}
-                disabled={currentQuestionIndex === quiz.questions.length - 1 || answers[currentQuestionIndex] === -1}
+                disabled={answers[currentQuestionIndex] === -1}
               >
                 Next
               </Button>

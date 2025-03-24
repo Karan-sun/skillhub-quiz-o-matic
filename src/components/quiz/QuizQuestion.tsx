@@ -37,7 +37,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
   }, [selectedOption]);
 
   const handleOptionSelect = (value: string) => {
-    if (!isAnswered) {
+    if (!isAnswered && !showResults) {
       const optionIndex = parseInt(value, 10);
       setSelected(optionIndex);
     }
@@ -82,7 +82,6 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
           value={selected?.toString()}
           onValueChange={handleOptionSelect}
           className="space-y-3"
-          disabled={isAnswered && showResults}
         >
           {question.options.map((option, index) => (
             <div
