@@ -15,6 +15,7 @@ import LeaderboardPage from "./pages/LeaderboardPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import AdminQuizzesPage from "./pages/admin/AdminQuizzesPage";
 import CreateQuizPage from "./pages/admin/CreateQuizPage";
 import EditQuizPage from "./pages/admin/EditQuizPage";
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/admin" element={<AdminDashboardPage />} />
               <Route path="/admin/quizzes" element={<AdminQuizzesPage />} />
               <Route path="/admin/quizzes/create" element={<CreateQuizPage />} />
               <Route path="/admin/quizzes/edit/:quizId" element={<EditQuizPage />} />

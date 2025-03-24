@@ -12,7 +12,7 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,7 +22,12 @@ const LoginForm: React.FC = () => {
 
     try {
       await login(email, password);
-      navigate("/");
+      // Redirect admin users to admin dashboard, others to home
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);

@@ -10,7 +10,8 @@ import {
   LogOut, 
   Menu, 
   X, 
-  User 
+  User,
+  LayoutDashboard 
 } from "lucide-react";
 import {
   Sheet,
@@ -53,9 +54,9 @@ const Navbar = () => {
 
   if (isAdmin) {
     navLinks.push({ 
-      name: "Manage Quizzes", 
-      path: "/admin/quizzes", 
-      icon: <BookOpen className="mr-2 h-4 w-4" /> 
+      name: "Admin Dashboard", 
+      path: "/admin", 
+      icon: <LayoutDashboard className="mr-2 h-4 w-4" /> 
     });
   }
 
@@ -120,6 +121,14 @@ const Navbar = () => {
                       <span>Profile</span>
                     </Link>
                   </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="cursor-pointer flex items-center">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        <span>Admin Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={logout} className="cursor-pointer text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
